@@ -9,21 +9,19 @@
 /* Begin PBXBuildFile section */
 		018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99BB29ADA197006330D8 /* AppDelegate.swift */; };
 		018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99BD29ADA197006330D8 /* SceneDelegate.swift */; };
-		018A99C029ADA197006330D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99BF29ADA197006330D8 /* ViewController.swift */; };
-		018A99C329ADA197006330D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018A99C129ADA197006330D8 /* Main.storyboard */; };
 		018A99C529ADA198006330D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018A99C429ADA198006330D8 /* Assets.xcassets */; };
 		018A99C829ADA198006330D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018A99C629ADA198006330D8 /* LaunchScreen.storyboard */; };
+		018A99D029ADA28F006330D8 /* ImageListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99CF29ADA28F006330D8 /* ImageListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		018A99B829ADA197006330D8 /* FlickrViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018A99BB29ADA197006330D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		018A99BD29ADA197006330D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		018A99BF29ADA197006330D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		018A99C229ADA197006330D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		018A99C429ADA198006330D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		018A99C729ADA198006330D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		018A99C929ADA198006330D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		018A99CF29ADA28F006330D8 /* ImageListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +56,7 @@
 			children = (
 				018A99BB29ADA197006330D8 /* AppDelegate.swift */,
 				018A99BD29ADA197006330D8 /* SceneDelegate.swift */,
-				018A99BF29ADA197006330D8 /* ViewController.swift */,
-				018A99C129ADA197006330D8 /* Main.storyboard */,
+				018A99CF29ADA28F006330D8 /* ImageListVC.swift */,
 				018A99C429ADA198006330D8 /* Assets.xcassets */,
 				018A99C629ADA198006330D8 /* LaunchScreen.storyboard */,
 				018A99C929ADA198006330D8 /* Info.plist */,
@@ -127,7 +124,6 @@
 			files = (
 				018A99C829ADA198006330D8 /* LaunchScreen.storyboard in Resources */,
 				018A99C529ADA198006330D8 /* Assets.xcassets in Resources */,
-				018A99C329ADA197006330D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +134,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				018A99C029ADA197006330D8 /* ViewController.swift in Sources */,
 				018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */,
 				018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */,
+				018A99D029ADA28F006330D8 /* ImageListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		018A99C129ADA197006330D8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				018A99C229ADA197006330D8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		018A99C629ADA198006330D8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +280,6 @@
 				INFOPLIST_FILE = FlickrViewer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +307,6 @@
 				INFOPLIST_FILE = FlickrViewer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

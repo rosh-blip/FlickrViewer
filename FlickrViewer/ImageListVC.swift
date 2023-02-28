@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ImageListVC.swift
 //  FlickrViewer
 //
 //  Created by Roshan Abraham on 28/2/2023.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ImageListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .systemMint
     }
-
+    
 
 }
-
