@@ -12,6 +12,7 @@
 		018A99C529ADA198006330D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018A99C429ADA198006330D8 /* Assets.xcassets */; };
 		018A99C829ADA198006330D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018A99C629ADA198006330D8 /* LaunchScreen.storyboard */; };
 		018A99D029ADA28F006330D8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99CF29ADA28F006330D8 /* HomeViewController.swift */; };
+		01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		018A99C729ADA198006330D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		018A99C929ADA198006330D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		018A99CF29ADA28F006330D8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				018A99BB29ADA197006330D8 /* AppDelegate.swift */,
 				018A99BD29ADA197006330D8 /* SceneDelegate.swift */,
 				018A99CF29ADA28F006330D8 /* HomeViewController.swift */,
+				01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */,
 				018A99C429ADA198006330D8 /* Assets.xcassets */,
 				018A99C629ADA198006330D8 /* LaunchScreen.storyboard */,
 				018A99C929ADA198006330D8 /* Info.plist */,
@@ -136,6 +139,7 @@
 			files = (
 				018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */,
 				018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */,
+				01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */,
 				018A99D029ADA28F006330D8 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
