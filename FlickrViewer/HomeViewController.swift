@@ -10,9 +10,12 @@ import UIKit
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private var collectionView: UICollectionView?
+    let flickrURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&lat=-33.868820&lon=151.209290&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getFlickrData(from: flickrURL)
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 1
@@ -46,5 +49,31 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let detailsVC = DetailsViewController()
         present(detailsVC, animated: true)
         // passing through a struct
+    }
+    
+    func getFlickrData(from url: String){
+        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
+            
+            guard let data = data, error == nil else {
+                print("failed to retrieve")
+                return
+            }
+            var result: Flickr?
+            do {
+                result = try JSONDecoder().decode(Flickr.self, from: data)
+            }
+            catch {
+                print("failed to convert")
+            }
+            guard let json = result else {
+                return
+            }
+            print(json.photos.photo[0].id)
+            //            print(json.photos.photo.title)
+            //            print(json.photos.photo.tags)
+        })
+        
+        task.resume()
+        
     }
 }
