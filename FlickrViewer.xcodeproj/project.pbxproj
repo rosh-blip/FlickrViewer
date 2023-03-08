@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011CF57D29B84B3700C8AAC7 /* FlickrDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CF57C29B84B3700C8AAC7 /* FlickrDataModel.swift */; };
 		018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99BB29ADA197006330D8 /* AppDelegate.swift */; };
 		018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99BD29ADA197006330D8 /* SceneDelegate.swift */; };
 		018A99C529ADA198006330D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018A99C429ADA198006330D8 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011CF57C29B84B3700C8AAC7 /* FlickrDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrDataModel.swift; sourceTree = "<group>"; };
 		018A99B829ADA197006330D8 /* FlickrViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018A99BB29ADA197006330D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		018A99BD29ADA197006330D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,10 +64,11 @@
 			children = (
 				018A99BB29ADA197006330D8 /* AppDelegate.swift */,
 				018A99BD29ADA197006330D8 /* SceneDelegate.swift */,
+				011CF57C29B84B3700C8AAC7 /* FlickrDataModel.swift */,
 				018A99CF29ADA28F006330D8 /* HomeViewController.swift */,
-				01E0CA5229B1C90E008BD09C /* FVLabel.swift */,
 				01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */,
 				01E0CA5429B1D291008BD09C /* DetailsViewController.swift */,
+				01E0CA5229B1C90E008BD09C /* FVLabel.swift */,
 				018A99C429ADA198006330D8 /* Assets.xcassets */,
 				018A99C629ADA198006330D8 /* LaunchScreen.storyboard */,
 				018A99C929ADA198006330D8 /* Info.plist */,
@@ -145,6 +148,7 @@
 			files = (
 				018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */,
 				018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */,
+				011CF57D29B84B3700C8AAC7 /* FlickrDataModel.swift in Sources */,
 				01E0CA5329B1C90E008BD09C /* FVLabel.swift in Sources */,
 				01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */,
 				018A99D029ADA28F006330D8 /* HomeViewController.swift in Sources */,
