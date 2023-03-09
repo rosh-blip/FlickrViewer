@@ -6,15 +6,21 @@
 //
 
 import UIKit
+import CoreLocation
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate {
     
     private var collectionView: UICollectionView?
+    
     let flickrURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&lat=-33.868820&lon=151.209290&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
+    
+    var manager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getFlickrData(from: flickrURL)
+        
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -35,6 +41,30 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            manager.stopUpdatingLocation()
+
+            reportLocation(location)
+
+        }
+    }
+    
+    func reportLocation(_ location: CLLocation){
+        print(location.coordinate.longitude)
+        print(location.coordinate.latitude)
+    }
+    
+    
+    // grid
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 30
     }
@@ -51,6 +81,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         // passing through a struct
     }
     
+    
+    //network call
     func getFlickrData(from url: String){
         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
             
