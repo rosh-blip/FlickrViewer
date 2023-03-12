@@ -12,14 +12,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     private var collectionView: UICollectionView?
     
-    let flickrURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&lat=-33.868820&lon=151.209290&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
+    var flickrURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&lat=-33.868820&lon=151.209290&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
     
     var manager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getFlickrData(from: flickrURL)
+//        getFlickrData(from: flickrURL)
         
         
         let layout = UICollectionViewFlowLayout()
@@ -59,8 +59,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func reportLocation(_ location: CLLocation){
+        flickrURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&lat=" + String(location.coordinate.latitude) + "&lon=" + String(location.coordinate.longitude) + "&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
+        
         print(location.coordinate.longitude)
         print(location.coordinate.latitude)
+        print(flickrURL)
+        getFlickrData(from: flickrURL)
     }
     
     
@@ -86,6 +90,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func getFlickrData(from url: String){
         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
             
+            print(url)
             guard let data = data, error == nil else {
                 print("failed to retrieve")
                 return
