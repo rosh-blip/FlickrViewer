@@ -8,19 +8,16 @@
 import UIKit
 import CoreLocation
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private var collectionView: UICollectionView?
+    private var viewModel = ViewModel()
     
-    var flickrURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&lat=-33.868820&lon=151.209290&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
-    
-    var manager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        getFlickrData(from: flickrURL)
-        
+        viewModel.requestLocation()
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -40,33 +37,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.frame = view.bounds
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            manager.stopUpdatingLocation()
 
-            reportLocation(location)
-
-        }
-    }
-    
-    func reportLocation(_ location: CLLocation){
-        flickrURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&lat=" + String(location.coordinate.latitude) + "&lon=" + String(location.coordinate.longitude) + "&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
-        
-        print(location.coordinate.longitude)
-        print(location.coordinate.latitude)
-        print(flickrURL)
-        getFlickrData(from: flickrURL)
-    }
-    
     
     // grid
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -83,34 +54,5 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let detailsVC = DetailsViewController()
         present(detailsVC, animated: true)
         // passing through a struct
-    }
-    
-    
-    //network call
-    func getFlickrData(from url: String){
-        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
-            
-            print(url)
-            guard let data = data, error == nil else {
-                print("failed to retrieve")
-                return
-            }
-            var result: Flickr?
-            do {
-                result = try JSONDecoder().decode(Flickr.self, from: data)
-            }
-            catch {
-                print("failed to convert")
-            }
-            guard let json = result else {
-                return
-            }
-            print(json.photos.photo[0].id)
-            //            print(json.photos.photo.title)
-            //            print(json.photos.photo.tags)
-        })
-        
-        task.resume()
-        
     }
 }
