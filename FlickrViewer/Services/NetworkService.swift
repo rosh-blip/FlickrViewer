@@ -5,9 +5,9 @@
 //  Created by Roshan Abraham on 23/3/2023.
 //
 
-import Foundation
+import UIKit
 
-class NetworkService {
+class NetworkService: NSObject {
     
     func requestImageList(from url: URL, completion: @escaping (Flickr?, Error?) -> (Void) ){
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -28,4 +28,20 @@ class NetworkService {
         }
         task.resume()
     }
+    
+
 }
+extension NetworkService: URLSessionDelegate {
+    func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+        let downloadTask = session.downloadTask(with: url)
+        downloadTask.resume()
+    }
+    
+
+
+}
+//
+//extension NetworkService: URLSessionDownloadDelegate {
+//
+//}

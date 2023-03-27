@@ -46,7 +46,7 @@ final class ViewModel {
             }
             
             self.imageList = list
-            print(self.imageList)
+//            print(self.imageList)
 //            print(self?.imageList!)
 //            DispatchQueue.main.async {
 //                HomeViewController.collectionView(self).reloadData()
