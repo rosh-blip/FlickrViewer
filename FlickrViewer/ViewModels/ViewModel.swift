@@ -5,8 +5,8 @@
 //  Created by Roshan Abraham on 10/3/2023.
 //
 
-import Foundation
 import CoreLocation
+import UIKit
 
 
 final class ViewModel {
@@ -50,6 +50,10 @@ extension ViewModel: LocationServiceDelegate {
     }
 }
 extension ViewModel: NetworkServiceDelegate {
+    func didGetImg(image: UIImage) {
+        // TODO
+    }
+    
     func didGetImgList(imgList: Flickr) {
 //        print(imgList)
         self.imgList = imgList
