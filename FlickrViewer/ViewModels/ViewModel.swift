@@ -33,11 +33,14 @@ final class ViewModel {
         networkService.getImgList(from: url, delegate: self)
     }
     
-    func formatLoadImgRequest(server: String, id: String, secret: String) -> String {
+    func formatLoadImgRequest(server: String, id: String, secret: String) -> URL {
 //        ex: https://live.staticflickr.com/{server-id}/{id}_{secret}_{size-suffix}.jpg
-        return "https://live.staticflickr.com/\(server)/\(id)_\(secret)_s.jpg"
+        return URL(string: "https://live.staticflickr.com/\(server)/\(id)_\(secret)_s.jpg")!
     }
 
+    func loadImg(from url: URL) {
+        networkService.getImg(from: url, delegate: self)
+    }
 }
 
 extension ViewModel: LocationServiceDelegate {
@@ -48,7 +51,7 @@ extension ViewModel: LocationServiceDelegate {
 }
 extension ViewModel: NetworkServiceDelegate {
     func didGetImgList(imgList: Flickr) {
-        print(imgList)
+//        print(imgList)
         self.imgList = imgList
     }
 }

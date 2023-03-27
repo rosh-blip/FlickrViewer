@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol NetworkServiceDelegate: AnyObject {
     func didGetImgList(imgList: Flickr)
+    func didGetImg(image: UIImage)
 //    func getImageDetails(int)
 }
 
@@ -18,10 +20,8 @@ final class NetworkService {
     
     func getImgList(from url: URL, delegate: NetworkServiceDelegate) {
         self.delegate = delegate
-        print(url)
+//        print(url)
         let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-            
-            //            print(url)
             guard let data = data, error == nil else {
                 print("failed to retrieve")
                 return
@@ -36,14 +36,27 @@ final class NetworkService {
             guard let json = result else {
                 return
             }
-            //            print (json.photos.photo[0].id)
             delegate.didGetImgList(imgList: json)
-            // what if i create call the delegate function here, and pass the data out at this point?
-            // could save the time of writing a new api service that uses the urlsession built-in delegate
-            
         })
         
         task.resume()
+    }
+    
+    func getImg(from url: URL, delegate: NetworkServiceDelegate){
+        self.delegate = delegate
+        
+        
+        DispatchQueue.global().async {
+            // Fetch Image Data
+            if let data = try? Data(contentsOf: url) {
+                DispatchQueue.main.async {
+                    // Create Image and Update Image View
+//                    self.imageView.image = UIImage(data: data)
+                    
+                    delegate.didGetImg(image: (UIImage(data:data) ?? UIImage(systemName: "gear")!))
+                }
+            }
+        }
         
     }
 }

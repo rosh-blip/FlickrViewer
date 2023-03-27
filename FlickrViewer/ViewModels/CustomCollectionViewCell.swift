@@ -10,9 +10,10 @@ import UIKit
 class CustomCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomCollectionViewCell"
+    private let networkService = NetworkService()
     
     
-    private let imageView: UIImageView = {
+    var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "bolt.circle")
         return imageView
@@ -32,4 +33,8 @@ class CustomCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
     }
+    
+//    func updateImage(){
+////        self.imageView =
+//    }
 }

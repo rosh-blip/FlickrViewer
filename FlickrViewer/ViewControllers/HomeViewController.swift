@@ -47,18 +47,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath)
         // i reckon i can use indexPath here to dynamically allocate images to squares,
-        var title = viewModel.imgList?.photos.photo[indexPath.row].title
+//        let title = viewModel.imgList?.photos.photo[indexPath.row].title ?? "loading"
+//        print(title)
         
-        if( title == nil ) { title = "loading" }
         
         
         let server = viewModel.imgList?.photos.photo[indexPath.row].server
         let id = viewModel.imgList?.photos.photo[indexPath.row].id
         let secret = viewModel.imgList?.photos.photo[indexPath.row].secret
         
+        // could do without all this checking if instead i did the error checking in the dataTask
         if ((server != nil) && (id != nil) && (secret != nil)) {
-            var url = viewModel.formatLoadImgRequest(server: server!, id: id!, secret: secret!)
-            
+            let url: URL = viewModel.formatLoadImgRequest(server: server!, id: id!, secret: secret!)
+            viewModel.loadImg(from: url)
             
             print(url)
         }
@@ -72,8 +73,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsVC = DetailsViewController()
+        let detailsVC = DetailsViewController() // passing through a struct
         present(detailsVC, animated: true)
-        // passing through a struct
+        
     }
 }
