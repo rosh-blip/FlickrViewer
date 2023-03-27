@@ -10,12 +10,11 @@ import CoreLocation
 
 
 final class ViewModel {
-    
+
     private var locationService = LocationService()
-    
+    private var networkService = NetworkService() 
     let baseURL: String = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
-    
-    var reqURL: URL?
+    var imgList: Flickr?
     
     func requestLocation() {
         locationService.initLocationService(delegate: self)
@@ -31,14 +30,23 @@ final class ViewModel {
     
     func requestImageList(location: CLLocation) {
         let url = formatImageListRequest(location: location)
+        networkService.getImgList(from: url, delegate: self)
         
         
     }
     
 }
-    extension ViewModel: LocationServiceDelegate {
-        func didGetLocation(location: CLLocation) {
-            requestImageList(location: location)
-            
-        }
+
+extension ViewModel: LocationServiceDelegate {
+    func didGetLocation(location: CLLocation) {
+        requestImageList(location: location)
+        
     }
+}
+extension ViewModel: NetworkServiceDelegate {
+    func didGetImgList(imgList: Flickr) {
+        print(imgList)
+        // assign to self
+        // notify vc of change
+    }
+}
