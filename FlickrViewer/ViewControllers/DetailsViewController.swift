@@ -10,12 +10,26 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     // receiving struct var
-    
+    var photo: Photo? // need to create delegate to pass data through
     //
-    let imageView = UIImageView()
-    let titleLabel = FVLabel(text: "dummy", fontSize: .heading) // will populate with struct data
-    let idLabel = FVLabel(text: "dummy", fontSize: .subheading)
-    let tagLabel = FVLabel(text: "dummy", fontSize: .body)
+    var imageView = UIImageView()
+    var titleLabel = FVLabel(text: "dummy", fontSize: .heading) // will populate with struct data
+    var idLabel = FVLabel(text: "dummy", fontSize: .subheading)
+    var tagLabel = FVLabel(text: "dummy", fontSize: .body)
+    
+    
+    init(photo: Photo? = nil) {
+        self.photo = photo
+        self.titleLabel.text = photo?.title ?? "loading"
+        self.idLabel.text = photo?.id ?? "loading"
+        self.tagLabel.text = photo?.tags ?? "loading"
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func viewDidLoad() {
@@ -38,6 +52,7 @@ class DetailsViewController: UIViewController {
             imageView.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: view.topAnchor, multiplier: 0.3)
         ])
     }
+    
     func configureLabels(){
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([

@@ -73,8 +73,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsVC = DetailsViewController() // passing through a struct
+        let photo = viewModel.imgList?.photos.photo[indexPath.row] ?? dummyPhotoData
+        let detailsVC = DetailsViewController(photo: photo) // passing through a struct
+//        detailsVC.photo = photo
         present(detailsVC, animated: true)
+        
         
     }
 }

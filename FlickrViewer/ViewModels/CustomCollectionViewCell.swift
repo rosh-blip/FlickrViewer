@@ -35,6 +35,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
     }
     
 //    func updateImage(){
-////        self.imageView =
+//        self.imageView.image =
 //    }
-}
+//}
