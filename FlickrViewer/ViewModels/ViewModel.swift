@@ -46,7 +46,6 @@ extension ViewModel: LocationServiceDelegate {
 extension ViewModel: NetworkServiceDelegate {
     func didGetImgList(imgList: Flickr) {
         print(imgList)
-        // assign to self
-        // notify vc of change
+        self.imgList = imgList
     }
 }

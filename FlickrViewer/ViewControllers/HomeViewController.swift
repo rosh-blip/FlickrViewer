@@ -47,6 +47,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath)
         // i reckon i can use indexPath here to dynamically allocate images to squares,
+        var title = viewModel.imgList?.photos.photo[indexPath.row].title
+        
+        if( title == nil ) { title = "loading" }
+        print(title!)
+        // the cv after some time is able to notice the changes in the vm, and reinstates itself automatically
+        // now we need to update the imageview
+        
+        
         return cell
     }
     
