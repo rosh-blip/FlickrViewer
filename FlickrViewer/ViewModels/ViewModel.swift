@@ -31,10 +31,13 @@ final class ViewModel {
     func requestImageList(location: CLLocation) {
         let url = formatImageListRequest(location: location)
         networkService.getImgList(from: url, delegate: self)
-        
-        
     }
     
+    func formatLoadImgRequest(server: String, id: String, secret: String) -> String {
+//        ex: https://live.staticflickr.com/{server-id}/{id}_{secret}_{size-suffix}.jpg
+        return "https://live.staticflickr.com/\(server)/\(id)_\(secret)_s.jpg"
+    }
+
 }
 
 extension ViewModel: LocationServiceDelegate {

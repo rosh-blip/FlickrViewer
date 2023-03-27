@@ -50,7 +50,20 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         var title = viewModel.imgList?.photos.photo[indexPath.row].title
         
         if( title == nil ) { title = "loading" }
-        print(title!)
+        
+        
+        let server = viewModel.imgList?.photos.photo[indexPath.row].server
+        let id = viewModel.imgList?.photos.photo[indexPath.row].id
+        let secret = viewModel.imgList?.photos.photo[indexPath.row].secret
+        
+        if ((server != nil) && (id != nil) && (secret != nil)) {
+            var url = viewModel.formatLoadImgRequest(server: server!, id: id!, secret: secret!)
+            
+            
+            print(url)
+        }
+        
+//        print(title!)
         // the cv after some time is able to notice the changes in the vm, and reinstates itself automatically
         // now we need to update the imageview
         
