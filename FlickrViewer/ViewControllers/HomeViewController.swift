@@ -36,6 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
         
+        
     }
 
     
@@ -52,6 +53,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let secret = viewModel.imgList?.photos.photo[indexPath.row].secret
         
         cell.updateImg(server: server, id: id, secret: secret)
+        
         
         return cell
     }

@@ -8,13 +8,11 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-    
-    // receiving struct var
-    var data: Photo? // need to create delegate to pass data through
+    var data: Photo?
     var img: UIImage?
     
     var imageView = UIImageView()
-    var titleLabel = FVLabel(text: "dummy", fontSize: .heading) // will populate with struct data
+    var titleLabel = FVLabel(text: "dummy", fontSize: .heading)
     var idLabel = FVLabel(text: "dummy", fontSize: .subheading)
     var tagLabel = FVLabel(text: "dummy", fontSize: .body)
     
@@ -51,9 +49,10 @@ class DetailsViewController: UIViewController {
             imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: view.topAnchor, multiplier: 0.3)
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
         ])
     }
+    
     
     func configureLabels(){
         view.addSubview(titleLabel)
