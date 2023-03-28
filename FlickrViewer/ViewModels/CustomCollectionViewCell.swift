@@ -10,7 +10,8 @@ import UIKit
 class CustomCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomCollectionViewCell"
-    private let networkService = NetworkService()
+//    private let networkService = NetworkService()
+    private let viewModel = ViewModel()
     
     
     var imageView: UIImageView = {
@@ -34,7 +35,18 @@ class CustomCollectionViewCell: UICollectionViewCell {
         imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
     }
     
-//    func updateImage(){
-//        self.imageView.image =
-//    }
-//}
+    func updateImg(server: String?, id: String?, secret: String?){
+        if((server != nil) && (id != nil) && (secret != nil)) { viewModel.requestImg(server: server!, id: id!, secret: secret!, delegate: self) }
+    }
+}
+
+
+
+extension CustomCollectionViewCell: NetworkServiceDelegate {
+    func didGetImgList(imgList: Flickr) {
+    }
+    
+    func didGetImg(image: UIImage) {
+        self.imageView.image = image
+    }
+}

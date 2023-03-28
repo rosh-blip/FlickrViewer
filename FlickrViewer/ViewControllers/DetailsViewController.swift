@@ -10,19 +10,21 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     // receiving struct var
-    var photo: Photo? // need to create delegate to pass data through
-    //
+    var data: Photo? // need to create delegate to pass data through
+    var img: UIImage?
+    
     var imageView = UIImageView()
     var titleLabel = FVLabel(text: "dummy", fontSize: .heading) // will populate with struct data
     var idLabel = FVLabel(text: "dummy", fontSize: .subheading)
     var tagLabel = FVLabel(text: "dummy", fontSize: .body)
     
     
-    init(photo: Photo? = nil) {
-        self.photo = photo
-        self.titleLabel.text = photo?.title ?? "loading"
-        self.idLabel.text = photo?.id ?? "loading"
-        self.tagLabel.text = photo?.tags ?? "loading"
+    init(data: Photo? = nil, img: UIImage?) {
+        self.data = data
+        self.img = img
+        self.titleLabel.text = self.data?.title ?? "loading"
+        self.idLabel.text = self.data?.id ?? "loading"
+        self.tagLabel.text = self.data?.tags ?? "loading"
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -43,7 +45,7 @@ class DetailsViewController: UIViewController {
     func configureImageView(){
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "bolt.circle") // replace with img url
+        imageView.image = self.img ?? UIImage(systemName: "bolt.circle") // replace with img url
 
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),

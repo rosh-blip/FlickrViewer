@@ -33,13 +33,14 @@ final class ViewModel {
         networkService.getImgList(from: url, delegate: self)
     }
     
-    func formatLoadImgRequest(server: String, id: String, secret: String) -> URL {
-//        ex: https://live.staticflickr.com/{server-id}/{id}_{secret}_{size-suffix}.jpg
+    
+    func formatImgRequest(server: String, id: String, secret: String) -> URL {
         return URL(string: "https://live.staticflickr.com/\(server)/\(id)_\(secret)_s.jpg")!
     }
 
-    func loadImg(from url: URL) {
-        networkService.getImg(from: url, delegate: self)
+    func requestImg(server: String, id: String, secret: String, delegate: NetworkServiceDelegate) {
+        let url = formatImgRequest(server: server, id: id, secret: secret)
+        networkService.getImg(from: url, delegate: delegate)
     }
 }
 

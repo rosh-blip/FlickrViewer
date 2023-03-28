@@ -45,39 +45,26 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath)
-        // i reckon i can use indexPath here to dynamically allocate images to squares,
-//        let title = viewModel.imgList?.photos.photo[indexPath.row].title ?? "loading"
-//        print(title)
-        
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
         
         let server = viewModel.imgList?.photos.photo[indexPath.row].server
         let id = viewModel.imgList?.photos.photo[indexPath.row].id
         let secret = viewModel.imgList?.photos.photo[indexPath.row].secret
         
-        // could do without all this checking if instead i did the error checking in the dataTask
-        if ((server != nil) && (id != nil) && (secret != nil)) {
-            let url: URL = viewModel.formatLoadImgRequest(server: server!, id: id!, secret: secret!)
-            viewModel.loadImg(from: url)
-            
-            print(url)
-        }
-        
-//        print(title!)
-        // the cv after some time is able to notice the changes in the vm, and reinstates itself automatically
-        // now we need to update the imageview
-        
+        cell.updateImg(server: server, id: id, secret: secret)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let photo = viewModel.imgList?.photos.photo[indexPath.row] ?? dummyPhotoData
-        let detailsVC = DetailsViewController(photo: photo) // passing through a struct
-//        detailsVC.photo = photo
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
+
+        let data = viewModel.imgList?.photos.photo[indexPath.row] ?? dummyPhotoData
+        let img = cell.imageView.image
+        let detailsVC = DetailsViewController(data: data, img: img) // passing through a struct
         present(detailsVC, animated: true)
         
         
     }
 }
+ 
