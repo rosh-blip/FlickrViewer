@@ -59,20 +59,23 @@ class DetailsViewController: UIViewController {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30)
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
 
         ])
         view.addSubview(idLabel)
         NSLayoutConstraint.activate([
             idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
+            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            idLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
 
         ])
         
         view.addSubview(tagLabel)
         NSLayoutConstraint.activate([
             tagLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tagLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 20)
+            tagLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 20),
+            tagLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
         
     }

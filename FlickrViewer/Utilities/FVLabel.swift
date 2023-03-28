@@ -35,17 +35,18 @@ class FVLabel: UILabel {
             self.font = .systemFont(ofSize: 17)
         case .body:
             self.font = .systemFont(ofSize: 13)
+
         }
         configure()
         
     }
     
     func configure() {
-        textColor = .label
-        textAlignment = .left
-        numberOfLines = 0
-        lineBreakMode = .byWordWrapping
-        translatesAutoresizingMaskIntoConstraints = false
+        self.textColor = .label
+        self.textAlignment = .center
+        self.numberOfLines = 0
+        self.lineBreakMode = .byWordWrapping
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
 
