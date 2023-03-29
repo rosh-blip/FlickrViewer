@@ -35,23 +35,16 @@ class CustomCollectionViewCell: UICollectionViewCell {
         imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
     }
     
-    public func updateImg(server: String?, id: String?, secret: String?){
-        if((server != nil) && (id != nil) && (secret != nil)) { viewModel.requestImg(server: server!, id: id!, secret: secret!, delegate: self) }
+    public func updateImage(img: UIImage){
+        self.imageView.image = img
     }
+    
+//    public func updateImg(server: String?, id: String?, secret: String?){
+//        if((server != nil) && (id != nil) && (secret != nil)) { viewModel.requestImg(server: server!, id: id!, secret: secret!, delegate: self) }
+//    }
     
 //    override func prepareForReuse() {
 //        super.prepareForReuse()
 //        imageView.image = nil
 //    }
-}
-
-
-
-extension CustomCollectionViewCell: NetworkServiceDelegate {
-    func didGetImgList(imgList: Flickr) {
-    }
-    
-    func didGetImg(image: UIImage) {
-        self.imageView.image = image
-    }
 }

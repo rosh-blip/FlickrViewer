@@ -15,6 +15,7 @@ final class ViewModel {
     private var networkService = NetworkService() 
     let baseURL: String = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1"
     var imgList: Flickr?
+    var imgs = Array<UIImage>(repeating: UIImage(systemName: "gear")!, count: 30)
     
     func requestLocation() {
         locationService.initLocationService(delegate: self)
@@ -38,9 +39,10 @@ final class ViewModel {
         return URL(string: "https://live.staticflickr.com/\(server)/\(id)_\(secret)_s.jpg")!
     }
 
-    func requestImg(server: String, id: String, secret: String, delegate: NetworkServiceDelegate) {
+    func requestImg(server: String, id: String, secret: String, pos: Int) {
+        
         let url = formatImgRequest(server: server, id: id, secret: secret)
-        networkService.getImg(from: url, delegate: delegate)
+        networkService.getImg(from: url, delegate: self, pos: pos)
     }
 }
 
@@ -51,12 +53,12 @@ extension ViewModel: LocationServiceDelegate {
     }
 }
 extension ViewModel: NetworkServiceDelegate {
-    func didGetImg(image: UIImage) {
-        // TODO
+    func didGetImg(image: UIImage, pos: Int) {
+        self.imgs.insert(image, at: pos)
     }
     
     func didGetImgList(imgList: Flickr) {
-//        print(imgList)
         self.imgList = imgList
+        // here lets just load all the images in 1
     }
 }

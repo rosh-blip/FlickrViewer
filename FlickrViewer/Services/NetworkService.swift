@@ -9,7 +9,7 @@ import UIKit
 
 protocol NetworkServiceDelegate: AnyObject {
     func didGetImgList(imgList: Flickr)
-    func didGetImg(image: UIImage)
+    func didGetImg(image: UIImage, pos: Int)
 //    func getImageDetails(int)
 }
 
@@ -41,7 +41,7 @@ final class NetworkService {
         task.resume()
     }
     
-    func getImg(from url: URL, delegate: NetworkServiceDelegate){
+    func getImg(from url: URL, delegate: NetworkServiceDelegate, pos: Int){
         self.delegate = delegate
         
         
@@ -52,7 +52,7 @@ final class NetworkService {
                     // Create Image and Update Image View
 //                    self.imageView.image = UIImage(data: data)
                     
-                    delegate.didGetImg(image: (UIImage(data:data) ?? UIImage(systemName: "gear")!))
+                    delegate.didGetImg(image: (UIImage(data:data) ?? UIImage(systemName: "gear")!), pos: pos)
                 }
             }
         }
