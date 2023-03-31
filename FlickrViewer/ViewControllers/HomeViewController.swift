@@ -16,7 +16,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.initViewModel()
+        
+        viewModel.initViewModel(delegate: self)
         viewModel.requestLocation()
         
         let layout = UICollectionViewFlowLayout()
@@ -77,3 +78,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 }
  
+extension HomeViewController: ViewModelDelegate {
+    func didUpdateImgs() {
+        collectionView?.reloadData()
+    }
+    
+    func didUpdateImgList() {
+        collectionView?.reloadData()
+    }
+}

@@ -9,16 +9,24 @@ import CoreLocation
 import UIKit
 
 
+protocol ViewModelDelegate: AnyObject {
+    func didUpdateImgList() // needs to be called and defined
+    func didUpdateImgs() // needs to be called and defined
+}
+
 final class ViewModel {
 
-    private var locationService = LocationService() 
+    weak var delegate: ViewModelDelegate?
+    
+    private var locationService = LocationService()
     private var networkService = NetworkService() // can pass the delegate in here, don't need to pass in delegate each func call
 
     var imgList: Flickr?
     var imgs = Array<UIImage>(repeating: UIImage(systemName: "gear")!, count: 30)
     
     
-    func initViewModel() {// will eventually require a delegate from the view controller
+    func initViewModel(delegate: ViewModelDelegate) {// will eventually require a delegate from the view controller
+        self.delegate = delegate
         locationService.initLocationService(delegate: self)
         networkService.initNetworkService(delegate: self)
     }
@@ -61,10 +69,12 @@ extension ViewModel: LocationServiceDelegate {
 extension ViewModel: NetworkServiceDelegate {
     func didGetImg(image: UIImage, pos: Int) {
         self.imgs.insert(image, at: pos) // this does not reload the collecview
+        self.delegate?.didUpdateImgs()
     }
     
     func didGetImgList(imgList: Flickr) {
         self.imgList = imgList
+        self.delegate?.didUpdateImgList()
         // need to notify the collec view so it can start loading in images correctly
     }
 }
