@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.initViewModel()
         viewModel.requestLocation()
         
         let layout = UICollectionViewFlowLayout()

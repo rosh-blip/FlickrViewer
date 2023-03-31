@@ -19,6 +19,10 @@ class LocationService: NSObject {
     
     func initLocationService(delegate: LocationServiceDelegate?) {
         self.delegate = delegate
+        
+    }
+    
+    func getUserLocation(){
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
@@ -34,7 +38,7 @@ extension LocationService: CLLocationManagerDelegate {
         if let location = locations.first {
             manager.stopUpdatingLocation()
 
-            delegate?.didGetLocation(location: location)
+            self.delegate?.didGetLocation(location: location)
         }
     }
 }

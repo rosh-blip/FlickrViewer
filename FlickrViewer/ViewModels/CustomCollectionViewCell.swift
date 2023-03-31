@@ -43,8 +43,8 @@ class CustomCollectionViewCell: UICollectionViewCell {
 //        if((server != nil) && (id != nil) && (secret != nil)) { viewModel.requestImg(server: server!, id: id!, secret: secret!, delegate: self) }
 //    }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        imageView.image = nil
-//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
 }

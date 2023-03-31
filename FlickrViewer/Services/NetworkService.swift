@@ -17,8 +17,11 @@ final class NetworkService {
     
     weak var delegate: NetworkServiceDelegate?
     
-    func getImgList(from url: URL, delegate: NetworkServiceDelegate) {
+    func initNetworkService(delegate: NetworkServiceDelegate){
         self.delegate = delegate
+    }
+    
+    func getImgList(from url: URL) {
 //        print(url)
         let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             guard let data = data, error == nil else {
@@ -35,14 +38,14 @@ final class NetworkService {
             guard let json = result else {
                 return
             }
-            delegate.didGetImgList(imgList: json)
+            self.delegate!.didGetImgList(imgList: json)
         })
         
         task.resume()
     }
     
-    func getImg(from url: URL, delegate: NetworkServiceDelegate, pos: Int){
-        self.delegate = delegate
+    func getImg(from url: URL, pos: Int){
+//        self.delegate = delegate
         
         
         DispatchQueue.global().async {
@@ -52,7 +55,7 @@ final class NetworkService {
                     // Create Image and Update Image View
 //                    self.imageView.image = UIImage(data: data)
                     
-                    delegate.didGetImg(image: (UIImage(data:data) ?? UIImage(systemName: "gear")!), pos: pos)
+                    self.delegate!.didGetImg(image: (UIImage(data:data) ?? UIImage(systemName: "gear")!), pos: pos)
                 }
             }
         }
