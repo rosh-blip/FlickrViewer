@@ -16,7 +16,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "bolt.circle")
+        imageView.image = nil //UIImage(systemName: "bolt.circle")
         return imageView
     }()
     
@@ -36,9 +36,10 @@ class CustomCollectionViewCell: UICollectionViewCell {
     }
     
     public func updateImage(img: UIImage){
-        DispatchQueue.main.async {
+// not too sure about the use of main q here
+//        DispatchQueue.main.async {
             self.imageView.image = img
-        }
+//        }
     }
     
 //    public func updateImg(server: String?, id: String?, secret: String?){

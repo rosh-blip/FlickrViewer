@@ -23,8 +23,8 @@ final class ViewModel {
     let num = 100
 
     var metaData: Flickr?
-    var imgs = Array<UIImage>(repeating: UIImage(systemName: "gear")!, count: 30)
-//    let imageCache = NSCache<AnyObject, AnyObject>()
+//    var imgs = Array<UIImage>(repeating: UIImage(systemName: "gear")!, count: 30)
+    var imageDict: [String: UIImage] = [:]
     
     
     func initViewModel(delegate: ViewModelDelegate) {
@@ -55,10 +55,11 @@ final class ViewModel {
         return URL(string: "https://live.staticflickr.com/\(server)/\(id)_\(secret)_s.jpg")!
     }
 
-    func requestImg(server: String, id: String, secret: String, pos: Int) {
-        
+    func requestImg(server: String, id: String, secret: String) {
+        //  need to implement a check if the image is already in the dictionary
+        // might be able to do this in the vc
         let url = formatImgRequest(server: server, id: id, secret: secret)
-        networkService.getImg(from: url, pos: pos)
+        networkService.getImg(from: url, id: id)
     }
 }
 
@@ -69,8 +70,9 @@ extension ViewModel: LocationServiceDelegate {
     }
 }
 extension ViewModel: NetworkServiceDelegate {
-    func didGetImg(image: UIImage, pos: Int) {
-        self.imgs.insert(image, at: pos) // this does not reload the collecview
+    func didGetImg(image: UIImage, id: String) {
+    
+        self.imageDict[id] = image
         self.delegate?.didUpdateImgs()
         
     }

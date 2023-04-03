@@ -37,7 +37,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
         
-        collectionView.reloadData()
+
     }
 
     
@@ -54,21 +54,33 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let id = viewModel.metaData?.photos.photo[indexPath.row].id
         let secret = viewModel.metaData?.photos.photo[indexPath.row].secret
 
-        if(viewModel.imgs[indexPath.row] == UIImage(systemName: "gear")!) {
+        // check if the initial data load has been completed, i wish there was a way to just know this
+            // then check if cell.imageview.image = nil
+        
+        if(cell.imageView.image == nil || cell.imageView.image == UIImage(systemName: "gear")){
             if((server != nil) && (id != nil) && (secret != nil)){
-                viewModel.requestImg(server: server!, id: id!, secret: secret!, pos: indexPath.row)
+                if(viewModel.imageDict[id!] == nil){
+                    viewModel.requestImg(server: server!, id: id!, secret: secret!)
+                }
+//                not too sure about use of main q here
+//                DispatchQueue.main.async {
+                    cell.updateImage(img: self.viewModel.imageDict[id!] ?? UIImage(systemName: "gear")!)
+//                }
             }
         }
-        cell.updateImage(img: viewModel.imgs[indexPath.row])
+        
+//        if(viewModel.imageDict[id] == UIImage(systemName: "gear")!) {
+//        }
 //        cell.updateImage(img: viewModel.currImg!)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        let id = viewModel.metaData?.photos.photo[indexPath.row].id
+        
         let data = viewModel.metaData?.photos.photo[indexPath.row] ?? dummyPhotoData
-        let img = viewModel.imgs[indexPath.row]
-        let detailsVC = DetailsViewController(data: data, img: img) // passing through a struct
+        let img = viewModel.imageDict[id!]
+        let detailsVC = DetailsViewController(data: data, img: img)
         present(detailsVC, animated: true)
         
         
