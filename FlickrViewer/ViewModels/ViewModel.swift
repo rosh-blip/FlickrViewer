@@ -19,13 +19,15 @@ final class ViewModel {
     weak var delegate: ViewModelDelegate?
     
     private var locationService = LocationService()
-    private var networkService = NetworkService() // can pass the delegate in here, don't need to pass in delegate each func call
+    private var networkService = NetworkService()
+    let num = 100
 
-    var imgList: Flickr?
+    var metaData: Flickr?
     var imgs = Array<UIImage>(repeating: UIImage(systemName: "gear")!, count: 30)
+//    let imageCache = NSCache<AnyObject, AnyObject>()
     
     
-    func initViewModel(delegate: ViewModelDelegate) {// will eventually require a delegate from the view controller
+    func initViewModel(delegate: ViewModelDelegate) {
         self.delegate = delegate
         locationService.initLocationService(delegate: self)
         networkService.initNetworkService(delegate: self)
@@ -40,7 +42,7 @@ final class ViewModel {
     func formatImageListRequest(location: CLLocation) -> URL {
         let lat: String = String(location.coordinate.latitude)
         let long: String = String(location.coordinate.longitude)
-        return URL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&extras=tags&per_page=30&page=1&format=json&nojsoncallback=1&lat=\(lat)&lon=\(long)")!
+        return URL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=84943cbdaddb93e5aaa7f1bc856facbe&extras=tags&per_page=\(num)&page=1&format=json&nojsoncallback=1&lat=\(lat)&lon=\(long)")!
     }
     
     func requestImageList(location: CLLocation) {
@@ -70,10 +72,11 @@ extension ViewModel: NetworkServiceDelegate {
     func didGetImg(image: UIImage, pos: Int) {
         self.imgs.insert(image, at: pos) // this does not reload the collecview
         self.delegate?.didUpdateImgs()
+        
     }
     
     func didGetImgList(imgList: Flickr) {
-        self.imgList = imgList
+        self.metaData = imgList
         self.delegate?.didUpdateImgList()
         // need to notify the collec view so it can start loading in images correctly
     }

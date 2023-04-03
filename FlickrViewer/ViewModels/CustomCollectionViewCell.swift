@@ -36,7 +36,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
     }
     
     public func updateImage(img: UIImage){
-        self.imageView.image = img
+        DispatchQueue.main.async {
+            self.imageView.image = img
+        }
     }
     
 //    public func updateImg(server: String?, id: String?, secret: String?){

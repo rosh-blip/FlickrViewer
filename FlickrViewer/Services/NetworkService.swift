@@ -38,14 +38,16 @@ final class NetworkService {
             guard let json = result else {
                 return
             }
-            self.delegate!.didGetImgList(imgList: json)
+            DispatchQueue.main.async {
+                self.delegate!.didGetImgList(imgList: json)
+            }
         })
         
         task.resume()
     }
     
+    
     func getImg(from url: URL, pos: Int){
-//        self.delegate = delegate
         
         
         DispatchQueue.global().async {

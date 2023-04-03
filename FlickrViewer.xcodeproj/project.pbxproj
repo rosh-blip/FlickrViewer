@@ -122,11 +122,11 @@
 		018A99BA29ADA197006330D8 /* FlickrViewer */ = {
 			isa = PBXGroup;
 			children = (
-				016E086C29CBD1400010F16D /* Services */,
-				018A99C929ADA198006330D8 /* Info.plist */,
-				011CF58B29BB01D100C8AAC7 /* Common */,
 				011CF58929BB01AB00C8AAC7 /* ViewControllers */,
 				011CF58729BB018D00C8AAC7 /* ViewModels */,
+				016E086C29CBD1400010F16D /* Services */,
+				011CF58B29BB01D100C8AAC7 /* Common */,
+				018A99C929ADA198006330D8 /* Info.plist */,
 				011CF58A29BB01C900C8AAC7 /* Utilities */,
 				011CF58829BB019900C8AAC7 /* Models */,
 			);

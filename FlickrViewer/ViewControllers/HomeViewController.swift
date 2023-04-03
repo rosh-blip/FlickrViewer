@@ -44,32 +44,29 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     // grid
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        collectionView.reloadData()
-        return viewModel.imgList?.photos.total ?? 30
+        return viewModel.num
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
         
-        let server = viewModel.imgList?.photos.photo[indexPath.row].server
-        let id = viewModel.imgList?.photos.photo[indexPath.row].id
-        let secret = viewModel.imgList?.photos.photo[indexPath.row].secret
-        // the vc should contain the logic, ie.
-            // call the vm function to load the img
-            // use a delegate to return the image itself, store this in an array called imgs at indexPath.row position
-            // then pass through this image to ccvc (from vc) and set it to update the imageView
+        let server = viewModel.metaData?.photos.photo[indexPath.row].server
+        let id = viewModel.metaData?.photos.photo[indexPath.row].id
+        let secret = viewModel.metaData?.photos.photo[indexPath.row].secret
+
         if(viewModel.imgs[indexPath.row] == UIImage(systemName: "gear")!) {
             if((server != nil) && (id != nil) && (secret != nil)){
                 viewModel.requestImg(server: server!, id: id!, secret: secret!, pos: indexPath.row)
             }
-            //        cell.updateImg(server: server, id: id, secret: secret)
         }
         cell.updateImage(img: viewModel.imgs[indexPath.row])
+//        cell.updateImage(img: viewModel.currImg!)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        let data = viewModel.imgList?.photos.photo[indexPath.row] ?? dummyPhotoData
+        let data = viewModel.metaData?.photos.photo[indexPath.row] ?? dummyPhotoData
         let img = viewModel.imgs[indexPath.row]
         let detailsVC = DetailsViewController(data: data, img: img) // passing through a struct
         present(detailsVC, animated: true)
@@ -80,10 +77,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
  
 extension HomeViewController: ViewModelDelegate {
     func didUpdateImgs() {
-        collectionView?.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
+        
     }
     
     func didUpdateImgList() {
-        collectionView?.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
     }
 }
