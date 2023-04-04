@@ -10,13 +10,12 @@ import UIKit
 class CustomCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomCollectionViewCell"
-//    private let networkService = NetworkService()
     private let viewModel = ViewModel()
     
     
     var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = nil //UIImage(systemName: "bolt.circle")
+        imageView.image = nil
         return imageView
     }()
     
@@ -36,16 +35,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
     }
     
     public func updateImage(img: UIImage){
-// not too sure about the use of main q here
-//        DispatchQueue.main.async {
             self.imageView.image = img
-//        }
     }
-    
-//    public func updateImg(server: String?, id: String?, secret: String?){
-//        if((server != nil) && (id != nil) && (secret != nil)) { viewModel.requestImg(server: server!, id: id!, secret: secret!, delegate: self) }
-//    }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil

@@ -7,6 +7,9 @@
 
 import UIKit
 
+// use separate vm for the details vc
+// use to assign the data from the prev vc
+
 class DetailsViewController: UIViewController {
     var data: Photo?
     var img: UIImage?
@@ -16,7 +19,7 @@ class DetailsViewController: UIViewController {
     var idLabel = FVLabel(text: "dummy", fontSize: .subheading)
     var tagLabel = FVLabel(text: "dummy", fontSize: .body)
     
-    
+    // this counts as bus logic, use a vm for this
     init(data: Photo? = nil, img: UIImage?) {
         self.data = data
         self.img = img
@@ -31,7 +34,7 @@ class DetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    // use a different ui lifecycle to improve performance
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -39,7 +42,8 @@ class DetailsViewController: UIViewController {
         configureLabels()
     }
     
-    
+    // set some constants to improve readability ie width = 0.8 or defaultImg = UIImage(smth)
+    //
     func configureImageView(){
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
