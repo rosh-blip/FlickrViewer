@@ -14,23 +14,13 @@ class DetailsViewController: UIViewController {
     
     private var viewModel: DetailsViewModel?
     
-//    var data: Photo?
-//    var img: UIImage?
-    
     public var imageView = UIImageView()
     public var titleLabel = FVLabel(fontSize: .heading)
     public var idLabel = FVLabel(fontSize: .subheading)
     public var tagLabel = FVLabel(fontSize: .body)
-    // this counts as bus logic, use a vm for this
     
     init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
-        
-//        self.data = data
-//        self.img = img
-//        self.titleLabel.text = self.data?.title ?? "loading"
-//        self.idLabel.text = self.data?.id ?? "loading"
-//        self.tagLabel.text = self.data?.tags ?? "loading"
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -51,7 +41,6 @@ class DetailsViewController: UIViewController {
     }
     
     // set some constants to improve readability ie width = 0.8 or defaultImg = UIImage(smth)
-    //
     private func configureImageView(){
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
