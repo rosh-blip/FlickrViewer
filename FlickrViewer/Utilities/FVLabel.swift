@@ -25,9 +25,8 @@ class FVLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(text: String, fontSize: textSize){ // make an enum for heading, subheading, body
+    init(fontSize: textSize){ // make an enum for heading, subheading, body
         super.init(frame: .zero)
-        self.text = text
         switch fontSize{
         case .heading:
             self.font = .systemFont(ofSize: 28)
@@ -39,6 +38,10 @@ class FVLabel: UILabel {
         }
         configure()
         
+    }
+    
+    func setText(text: String) {
+        self.text = text
     }
     
     func configure() {

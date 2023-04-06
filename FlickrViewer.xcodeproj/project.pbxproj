@@ -19,6 +19,7 @@
 		01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */; };
 		01E0CA5329B1C90E008BD09C /* FVLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5229B1C90E008BD09C /* FVLabel.swift */; };
 		01E0CA5529B1D291008BD09C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5429B1D291008BD09C /* DetailsViewController.swift */; };
+		C4BE182329DBF66E0077319E /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE182229DBF66E0077319E /* DetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		01E0CA5229B1C90E008BD09C /* FVLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FVLabel.swift; sourceTree = "<group>"; };
 		01E0CA5429B1D291008BD09C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		C4BE182229DBF66E0077319E /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */,
 				011CF58429BAF3CB00C8AAC7 /* HomeViewModel.swift */,
+				C4BE182229DBF66E0077319E /* DetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				011CF58529BAF3CB00C8AAC7 /* HomeViewModel.swift in Sources */,
 				01E0CA5329B1C90E008BD09C /* FVLabel.swift in Sources */,
 				01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */,
+				C4BE182329DBF66E0077319E /* DetailsViewModel.swift in Sources */,
 				018A99D029ADA28F006330D8 /* HomeViewController.swift in Sources */,
 				016E086B29CBCABD0010F16D /* LocationService.swift in Sources */,
 				01E0CA5529B1D291008BD09C /* DetailsViewController.swift in Sources */,

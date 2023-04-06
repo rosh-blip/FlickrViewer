@@ -22,7 +22,7 @@ final class HomeViewModel {
     
     private var locationService = LocationService()
     private var networkService = NetworkService()
-    let num = 100
+    public let num = 100
 
     static var metaData: Flickr?
     static var imageDict: [String: UIImage] = [:]

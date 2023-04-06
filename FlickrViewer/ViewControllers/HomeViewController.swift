@@ -59,6 +59,7 @@ extension HomeViewController: UICollectionViewDataSource{
                     viewModel.requestImg(server: server!, id: id!, secret: secret!)
                 }
                 // have a placeholder intially instead of
+                // UIActivityIndicatorView loading spinner (sort of) can use for a splash screen
                 cell.updateImage(img: HomeViewModel.imageDict[id!] ?? UIImage(systemName: "gear")!)
             }
         }
@@ -70,11 +71,16 @@ extension HomeViewController: UICollectionViewDataSource{
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // create functions that pulls out the meta data and the image itself, instead of accesssing in the vc
         let id = HomeViewModel.metaData?.photos.photo[indexPath.row].id
         
         let data = HomeViewModel.metaData?.photos.photo[indexPath.row] ?? dummyPhotoData
         let img = HomeViewModel.imageDict[id!]
-        let detailsVC = DetailsViewController(data: data, img: img)
+
+        // instantiate vm here
+        let detailsVM = DetailsViewModel(data: data, img: img)
+        // pass in the vm to the vc
+        let detailsVC = DetailsViewController(viewModel: detailsVM)
         present(detailsVC, animated: true)
     }
 }
