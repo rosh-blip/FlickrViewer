@@ -76,10 +76,7 @@ extension HomeViewController: UICollectionViewDelegate {
         
         let data = HomeViewModel.metaData?.photos.photo[indexPath.row] ?? dummyPhotoData
         let img = HomeViewModel.imageDict[id!]
-
-        // instantiate vm here
         let detailsVM = DetailsViewModel(data: data, img: img)
-        // pass in the vm to the vc
         let detailsVC = DetailsViewController(viewModel: detailsVM)
         present(detailsVC, animated: true)
     }

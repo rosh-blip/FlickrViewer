@@ -22,9 +22,9 @@ final class DetailsViewModel {
     // public func that assigns the details VC with the data in the vm
     public func assignData(vc: DetailsViewController) {
         vc.imageView.image = self.img
-        vc.idLabel.setText(text: self.data?.id ?? defaultText)
-        vc.titleLabel.setText(text: self.data?.title ?? defaultText)
-        vc.tagLabel.setText(text: self.data?.tags ?? defaultText)
+        vc.titleLabel.setText(text: "Title: \(self.data?.title ?? defaultText)")
+        vc.idLabel.setText(text: "ID: \(self.data?.id ?? defaultText)")
+        vc.tagLabel.setText(text: "Tags: \(self.data?.tags ?? defaultText)")
         
     }
     
