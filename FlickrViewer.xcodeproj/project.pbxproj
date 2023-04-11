@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		011CF57D29B84B3700C8AAC7 /* FlickrDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CF57C29B84B3700C8AAC7 /* FlickrDataModel.swift */; };
-		011CF58529BAF3CB00C8AAC7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CF58429BAF3CB00C8AAC7 /* ViewModel.swift */; };
+		011CF58529BAF3CB00C8AAC7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CF58429BAF3CB00C8AAC7 /* HomeViewModel.swift */; };
 		016E086B29CBCABD0010F16D /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016E086A29CBCABD0010F16D /* LocationService.swift */; };
 		016E087029D11B3E0010F16D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016E086F29D11B3E0010F16D /* NetworkService.swift */; };
 		018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A99BB29ADA197006330D8 /* AppDelegate.swift */; };
@@ -19,11 +19,12 @@
 		01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */; };
 		01E0CA5329B1C90E008BD09C /* FVLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5229B1C90E008BD09C /* FVLabel.swift */; };
 		01E0CA5529B1D291008BD09C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5429B1D291008BD09C /* DetailsViewController.swift */; };
+		C4BE182329DBF66E0077319E /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE182229DBF66E0077319E /* DetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		011CF57C29B84B3700C8AAC7 /* FlickrDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrDataModel.swift; sourceTree = "<group>"; };
-		011CF58429BAF3CB00C8AAC7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		011CF58429BAF3CB00C8AAC7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		016E086A29CBCABD0010F16D /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		016E086F29D11B3E0010F16D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		018A99B829ADA197006330D8 /* FlickrViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +37,7 @@
 		01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		01E0CA5229B1C90E008BD09C /* FVLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FVLabel.swift; sourceTree = "<group>"; };
 		01E0CA5429B1D291008BD09C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		C4BE182229DBF66E0077319E /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */,
-				011CF58429BAF3CB00C8AAC7 /* ViewModel.swift */,
+				011CF58429BAF3CB00C8AAC7 /* HomeViewModel.swift */,
+				C4BE182229DBF66E0077319E /* DetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -207,9 +210,10 @@
 				018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */,
 				018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */,
 				011CF57D29B84B3700C8AAC7 /* FlickrDataModel.swift in Sources */,
-				011CF58529BAF3CB00C8AAC7 /* ViewModel.swift in Sources */,
+				011CF58529BAF3CB00C8AAC7 /* HomeViewModel.swift in Sources */,
 				01E0CA5329B1C90E008BD09C /* FVLabel.swift in Sources */,
 				01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */,
+				C4BE182329DBF66E0077319E /* DetailsViewModel.swift in Sources */,
 				018A99D029ADA28F006330D8 /* HomeViewController.swift in Sources */,
 				016E086B29CBCABD0010F16D /* LocationService.swift in Sources */,
 				01E0CA5529B1D291008BD09C /* DetailsViewController.swift in Sources */,

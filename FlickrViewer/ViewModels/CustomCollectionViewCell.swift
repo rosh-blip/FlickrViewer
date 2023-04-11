@@ -10,8 +10,6 @@ import UIKit
 class CustomCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomCollectionViewCell"
-    private let viewModel = ViewModel()
-    
     
     var imageView: UIImageView = {
         let imageView = UIImageView()

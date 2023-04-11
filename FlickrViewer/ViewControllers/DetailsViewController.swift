@@ -11,21 +11,16 @@ import UIKit
 // use to assign the data from the prev vc
 
 class DetailsViewController: UIViewController {
-    var data: Photo?
-    var img: UIImage?
     
-    var imageView = UIImageView()
-    var titleLabel = FVLabel(text: "dummy", fontSize: .heading)
-    var idLabel = FVLabel(text: "dummy", fontSize: .subheading)
-    var tagLabel = FVLabel(text: "dummy", fontSize: .body)
+    private var viewModel: DetailsViewModel?
     
-    // this counts as bus logic, use a vm for this
-    init(data: Photo? = nil, img: UIImage?) {
-        self.data = data
-        self.img = img
-        self.titleLabel.text = self.data?.title ?? "loading"
-        self.idLabel.text = self.data?.id ?? "loading"
-        self.tagLabel.text = self.data?.tags ?? "loading"
+    public var imageView = UIImageView()
+    public var titleLabel = FVLabel(fontSize: .heading)
+    public var idLabel = FVLabel(fontSize: .subheading)
+    public var tagLabel = FVLabel(fontSize: .body)
+    
+    init(viewModel: DetailsViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -34,20 +29,22 @@ class DetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // use a different ui lifecycle to improve performance
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        viewModel?.assignData(vc: self) // might want to move this to the init
         configureImageView()
         configureLabels()
+        
     }
     
     // set some constants to improve readability ie width = 0.8 or defaultImg = UIImage(smth)
-    //
-    func configureImageView(){
+    private func configureImageView(){
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = self.img ?? UIImage(systemName: "bolt.circle") // replace with img url
+//        imageView.image = self.img ?? UIImage(systemName: "bolt.circle") // replace with img url
 
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
@@ -58,7 +55,7 @@ class DetailsViewController: UIViewController {
     }
     
     
-    func configureLabels(){
+    private func configureLabels(){
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
