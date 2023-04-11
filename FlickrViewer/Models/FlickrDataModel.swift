@@ -31,3 +31,4 @@ let dummyPhotoData = Photo(id: "0", secret: "0", server: "0", farm: 0, title: "0
 let dummyPageStats = PageStats(total: 1, photo: [dummyPhotoData])
 
 let dummyFlickrData: Flickr = Flickr(photos: dummyPageStats)
+

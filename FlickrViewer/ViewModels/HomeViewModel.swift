@@ -17,7 +17,7 @@ protocol HomeViewModelDelegate: AnyObject {
 //clear up: what vc is view model is this for
 // lock up the funcs that don't need to be externally accessed
 final class HomeViewModel {
-
+    
     weak var delegate: HomeViewModelDelegate?
     
     private var locationService = LocationService()
@@ -27,6 +27,16 @@ final class HomeViewModel {
     static var metaData: Flickr?
     static var imageDict: [String: UIImage] = [:]
     
+    public enum metaDataField {
+        case id
+        case title
+        case server
+        case secret
+        case tags
+    }
+    
+    
+    public let defaultText: String = "Loading..."
     
     public func initHomeViewModel(delegate: HomeViewModelDelegate) {
         self.delegate = delegate
@@ -40,15 +50,53 @@ final class HomeViewModel {
     }
     
     
-    private func requestImageList(location: CLLocation) { // use completion handler rather than delegate here
+    private func requestImageList(location: CLLocation) {
+        // use completion handler rather than delegate here
         let url = networkService.formatImageListRequest(location: location, num: num)
         networkService.getImgList(from: url)
     }
-
+    
     
     public func requestImg(server: String, id: String, secret: String) {
         let url = networkService.formatImgRequest(server: server, id: id, secret: secret)
         networkService.getImg(from: url, id: id)
+    }
+    
+    public func getId(at position: Int) -> String {
+        return HomeViewModel.metaData?.photos.photo[position].id ?? defaultText
+    }
+    
+    public func getServer(at position: Int) -> String {
+        return HomeViewModel.metaData?.photos.photo[position].server ?? defaultText
+    }
+    
+    public func getSecret(at position: Int) -> String {
+        return HomeViewModel.metaData?.photos.photo[position].secret ?? defaultText
+    }
+    
+    public func getTitle(at position: Int) -> String {
+        return HomeViewModel.metaData?.photos.photo[position].title ?? defaultText
+    }
+    
+    public func getTags(at position: Int) -> String {
+        return HomeViewModel.metaData?.photos.photo[position].tags ?? defaultText
+    }
+    
+//    public func getMetaDataField(metaDataField: metaDataField, at position: Int){
+//        var field: String?
+//        switch metaDataField {
+//        case .id:
+//            field = "id"
+//        case .title:
+//            <#code#>
+//        case .server:
+//            <#code#>
+//        case .secret:
+//            <#code#>
+//        case .tags:
+//            <#code#>
+//        }
+//        return HomeViewModel.metaData?.photos.photo[position].field
     }
 }
 

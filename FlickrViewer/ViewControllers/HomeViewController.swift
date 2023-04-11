@@ -49,18 +49,20 @@ extension HomeViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
         
-        let server = HomeViewModel.metaData?.photos.photo[indexPath.row].server
-        let id = HomeViewModel.metaData?.photos.photo[indexPath.row].id
-        let secret = HomeViewModel.metaData?.photos.photo[indexPath.row].secret
+        
+        let server = viewModel.getServer(at: indexPath.row)
+        let id = viewModel.getId(at: indexPath.row)
+        let secret = viewModel.getSecret(at: indexPath.row)
         
         if(cell.imageView.image == nil || cell.imageView.image == UIImage(systemName: "gear")){
-            if((server != nil) && (id != nil) && (secret != nil)){
-                if(HomeViewModel.imageDict[id!] == nil){
-                    viewModel.requestImg(server: server!, id: id!, secret: secret!)
+            // could avoid all of this if instead just adding the url as a field in the model immediately
+            if((server != viewModel.defaultText) && (id != viewModel.defaultText) && (secret != viewModel.defaultText)){
+                if(HomeViewModel.imageDict[id] == nil){
+                    viewModel.requestImg(server: server, id: id, secret: secret)
                 }
                 // have a placeholder intially instead of
                 // UIActivityIndicatorView loading spinner (sort of) can use for a splash screen
-                cell.updateImage(img: HomeViewModel.imageDict[id!] ?? UIImage(systemName: "gear")!)
+                cell.updateImage(img: HomeViewModel.imageDict[id] ?? UIImage(systemName: "gear")!)
             }
         }
         
@@ -71,13 +73,15 @@ extension HomeViewController: UICollectionViewDataSource{
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // create functions that pulls out the meta data and the image itself, instead of accesssing in the vc
-        let id = HomeViewModel.metaData?.photos.photo[indexPath.row].id
+
+        let id = viewModel.getId(at: indexPath.row)
+        let title = viewModel.getTitle(at: indexPath.row)
+        let tags = viewModel.getTags(at: indexPath.row)
+        let img = HomeViewModel.imageDict[id]
         
-        let data = HomeViewModel.metaData?.photos.photo[indexPath.row] ?? dummyPhotoData
-        let img = HomeViewModel.imageDict[id!]
-        let detailsVM = DetailsViewModel(data: data, img: img)
+        let detailsVM = DetailsViewModel(id: id, title: title, tags: tags, img: img)
         let detailsVC = DetailsViewController(viewModel: detailsVM)
+        
         present(detailsVC, animated: true)
     }
 }
