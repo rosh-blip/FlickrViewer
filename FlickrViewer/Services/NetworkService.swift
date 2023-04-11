@@ -9,10 +9,9 @@ import UIKit
 import CoreLocation
 
 protocol NetworkServiceDelegate: AnyObject {
-    func didGetImgList(imgList: Flickr)
     func didGetImg(image: UIImage, id: String)
 }
-
+// naming convention: all funcs making a request must begin with fetch
 final class NetworkService {
     
     weak var delegate: NetworkServiceDelegate?
@@ -21,30 +20,33 @@ final class NetworkService {
         self.delegate = delegate
     }
     
-    public func getImgList(from url: URL) {
-        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-            guard let data = data, error == nil else {
-                print("failed to retrieve")
-                return
-            }
-            var result: Flickr?
-            do {
-                result = try JSONDecoder().decode(Flickr.self, from: data)
-            }
-            catch {
-                print("failed to convert")
-            }
-            guard let json = result else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.delegate!.didGetImgList(imgList: json)
-            }
-        })
-        
-        task.resume()
+    private func decodeMetaData(from data: Data) -> Flickr? {
+        var result: Flickr?
+        do {
+            result = try JSONDecoder().decode(Flickr.self, from: data)
+            return result
+        }
+        catch { // TODO confirm how this works
+            print("Could not convert data to expected Flickr Object")
+            return nil
+        }
     }
     
+    
+    public func fetchMetaData(from url: URL, completion: @escaping (_ success: Bool, _ data: Flickr?) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            // should add a check for a good status code response
+            if let data = data {
+                guard let result = self.decodeMetaData(from: data) else { return }
+                completion(true, result)
+            }
+            else {
+                print("Could not retrieve data")
+                completion(false, nil)
+            }
+        }
+        task.resume()
+    }
     
     public func getImg(from url: URL, id: String){
         DispatchQueue.global().async {

@@ -51,9 +51,17 @@ final class HomeViewModel {
     
     
     private func requestImageList(location: CLLocation) {
-        // use completion handler rather than delegate here
         let url = networkService.formatImageListRequest(location: location, num: num)
-        networkService.getImgList(from: url)
+        
+        networkService.fetchMetaData(from: url) { success, data in
+            if success {
+                guard let data = data else { return }
+                HomeViewModel.metaData = data
+                self.delegate?.didUpdateImgList()
+            } else {
+                print("Metadata Network Request failed")
+            }
+        }
     }
     
     
@@ -105,7 +113,6 @@ final class HomeViewModel {
 extension HomeViewModel: LocationServiceDelegate {
     func didGetLocation(location: CLLocation) {
         requestImageList(location: location)
-        
     }
 }
 
@@ -115,11 +122,5 @@ extension HomeViewModel: NetworkServiceDelegate {
     
         HomeViewModel.imageDict[id] = image
         self.delegate?.didUpdateImgs()
-        
-    }
-    
-    func didGetImgList(imgList: Flickr) {
-        HomeViewModel.metaData = imgList
-        self.delegate?.didUpdateImgList()
     }
 }
