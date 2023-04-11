@@ -97,7 +97,7 @@ final class HomeViewModel {
 //            <#code#>
 //        }
 //        return HomeViewModel.metaData?.photos.photo[position].field
-    }
+//    }
 }
 
 
