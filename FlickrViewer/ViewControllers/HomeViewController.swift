@@ -49,21 +49,20 @@ extension HomeViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
         
-        
-        let server = viewModel.getServer(at: indexPath.row)
         let id = viewModel.getId(at: indexPath.row)
-        let secret = viewModel.getSecret(at: indexPath.row)
+        let url = viewModel.getURL(at:indexPath.row)
+        let cellImage = cell.imageView.image
         
-        if(cell.imageView.image == nil || cell.imageView.image == UIImage(systemName: "gear")){
-            // could avoid all of this if instead just adding the url as a field in the model immediately
-            if((server != viewModel.defaultText) && (id != viewModel.defaultText) && (secret != viewModel.defaultText)){
+        if(cellImage == nil || cellImage == UIImage(systemName: "gear")){
+            if(id != viewModel.defaultText) {
                 if(HomeViewModel.imageDict[id] == nil){
-                    viewModel.requestImg(server: server, id: id, secret: secret)
+                    viewModel.requestImage(of: id, from: url)
                 }
+            }
                 // have a placeholder intially instead of
                 // UIActivityIndicatorView loading spinner (sort of) can use for a splash screen
                 cell.updateImage(img: HomeViewModel.imageDict[id] ?? UIImage(systemName: "gear")!)
-            }
+//            }
         }
         
         return cell

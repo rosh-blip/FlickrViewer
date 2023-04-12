@@ -50,8 +50,8 @@ final class HomeViewModel {
     }
     
     
-    private func requestImageList(location: CLLocation) {
-        let url = networkService.formatImageListRequest(location: location, num: num)
+    private func requestMetaData(location: CLLocation) {
+        let url = networkService.formatMetaDataRequest(location: location, num: num)
         
         networkService.fetchMetaData(from: url) { success, data in
             if success {
@@ -64,11 +64,11 @@ final class HomeViewModel {
         }
     }
     
-    
-    public func requestImg(server: String, id: String, secret: String) {
-        let url = networkService.formatImgRequest(server: server, id: id, secret: secret)
-        networkService.getImg(from: url, id: id)
+    public func requestImage(of id: String, from url: URL){
+        networkService.fetchImage(of: id, from: url)
     }
+    
+    
     
     public func getId(at position: Int) -> String {
         return HomeViewModel.metaData?.photos.photo[position].id ?? defaultText
@@ -90,6 +90,10 @@ final class HomeViewModel {
         return HomeViewModel.metaData?.photos.photo[position].tags ?? defaultText
     }
     
+    public func getURL(at position: Int) -> URL {
+        return HomeViewModel.metaData?.photos.photo[position].url ?? URL(string: defaultText)!
+    }
+    
 //    public func getMetaDataField(metaDataField: metaDataField, at position: Int){
 //        var field: String?
 //        switch metaDataField {
@@ -106,13 +110,18 @@ final class HomeViewModel {
 //        }
 //        return HomeViewModel.metaData?.photos.photo[position].field
 //    }
+    
+//    public func requestImg(server: String, id: String, secret: String) {
+//        let url = networkService.formatImgRequest(server: server, id: id, secret: secret)
+//        networkService.getImg(from: url, id: id)
+//    }
 }
 
 
 
 extension HomeViewModel: LocationServiceDelegate {
     func didGetLocation(location: CLLocation) {
-        requestImageList(location: location)
+        requestMetaData(location: location)
     }
 }
 
