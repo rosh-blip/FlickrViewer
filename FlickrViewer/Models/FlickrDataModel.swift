@@ -43,7 +43,7 @@ struct Photo: Decodable {
         self.farm = try container.decode(Int.self, forKey: .farm)
         self.title = try container.decode(String.self, forKey: .title)
         self.tags = try container.decode(String.self, forKey: .tags)
-        self.url = URL(string: "https://live.staticflickr.com/\(self.server)/\(self.id)_\(self.secret)_s.jpg")!
+        self.url = URL(string: "https://live.staticflickr.com/\(self.server)/\(self.id)_\(self.secret).jpg")!
     }
     
 }
