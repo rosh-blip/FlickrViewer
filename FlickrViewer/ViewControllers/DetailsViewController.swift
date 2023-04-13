@@ -14,18 +14,18 @@ class DetailsViewController: UIViewController {
     
     private var viewModel: DetailsViewModel?
     
-    var imageView = UIImageView()
-    var titleLabel = FVLabel(fontSize: .heading)
-    var idLabel = FVLabel(fontSize: .subheading)
-    var tagLabel = FVLabel(fontSize: .body)
-    var closeButton = FVCloseButton()
+    let imageView = UIImageView()
+    let titleLabel = FVLabel(fontSize: .heading)
+    let idLabel = FVLabel(fontSize: .subheading)
+    let tagLabel = FVLabel(fontSize: .body)
+    let closeButton = FVCloseButton()
     
     private var widthMult = 0.8
+    
     
     init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -34,8 +34,8 @@ class DetailsViewController: UIViewController {
     
     
     // use a different ui lifecycle to improve performance
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         view.backgroundColor = .systemBackground
         viewModel?.assignData(vc: self)
         
@@ -100,8 +100,6 @@ class DetailsViewController: UIViewController {
         ])
         
     }
-    
-
     
     @objc func closeButtonTapped() {
         dismiss(animated: true, completion: nil)

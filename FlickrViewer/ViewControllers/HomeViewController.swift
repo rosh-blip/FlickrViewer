@@ -14,11 +14,10 @@ class HomeViewController: UIViewController {
     
     private var collectionView: UICollectionView?
     private var viewModel = HomeViewModel()
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
-        viewModel.initHomeViewModel(delegate: self)
-        viewModel.requestLocation()
+ 
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -36,6 +35,11 @@ class HomeViewController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
+    }
+    
+    override func viewDidLoad() {
+        viewModel.initHomeViewModel(delegate: self)
+        viewModel.requestLocation()
     }
 }
 
