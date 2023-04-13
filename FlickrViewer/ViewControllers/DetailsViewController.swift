@@ -7,7 +7,7 @@
 
 import UIKit
 
-// use separate vm for the details vc
+// use separate vm for the details vc 
 // use to assign the data from the prev vc
 
 class DetailsViewController: UIViewController {
@@ -44,6 +44,7 @@ class DetailsViewController: UIViewController {
     private func configureImageView(){
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
 //        imageView.image = self.img ?? UIImage(systemName: "bolt.circle") // replace with img url
 
         NSLayoutConstraint.activate([

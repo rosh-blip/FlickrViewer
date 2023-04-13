@@ -19,7 +19,8 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemRed
+        contentView.backgroundColor = .systemBackground
+        contentMode = .scaleAspectFill
         contentView.addSubview(imageView)
     }
     
