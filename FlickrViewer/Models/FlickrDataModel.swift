@@ -5,7 +5,7 @@
 //  Created by Roshan Abraham on 8/3/2023.
 //
 
-import Foundation
+import UIKit
 
 struct Flickr: Decodable {
     let photos: PageStats
@@ -32,7 +32,6 @@ struct Photo: Decodable {
         case farm
         case title
         case tags
-        case url
     }
     
     init(from decoder: Decoder) throws {
@@ -44,6 +43,7 @@ struct Photo: Decodable {
         self.title = try container.decode(String.self, forKey: .title)
         self.tags = try container.decode(String.self, forKey: .tags)
         self.url = URL(string: "https://live.staticflickr.com/\(self.server)/\(self.id)_\(self.secret).jpg")!
+
     }
     
 }

@@ -20,6 +20,7 @@
 		01E0CA5329B1C90E008BD09C /* FVLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5229B1C90E008BD09C /* FVLabel.swift */; };
 		01E0CA5529B1D291008BD09C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5429B1D291008BD09C /* DetailsViewController.swift */; };
 		C4BE182329DBF66E0077319E /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE182229DBF66E0077319E /* DetailsViewModel.swift */; };
+		C4BE182729E7CA840077319E /* FVCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE182629E7CA840077319E /* FVCloseButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		01E0CA5229B1C90E008BD09C /* FVLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FVLabel.swift; sourceTree = "<group>"; };
 		01E0CA5429B1D291008BD09C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		C4BE182229DBF66E0077319E /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		C4BE182629E7CA840077319E /* FVCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FVCloseButton.swift; path = FlickrViewer/Utilities/FVCloseButton.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				018A99C429ADA198006330D8 /* Assets.xcassets */,
 				018A99C629ADA198006330D8 /* LaunchScreen.storyboard */,
 				01E0CA5229B1C90E008BD09C /* FVLabel.swift */,
+				C4BE182629E7CA840077319E /* FVCloseButton.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */,
 				018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */,
 				011CF57D29B84B3700C8AAC7 /* FlickrDataModel.swift in Sources */,
+				C4BE182729E7CA840077319E /* FVCloseButton.swift in Sources */,
 				011CF58529BAF3CB00C8AAC7 /* HomeViewModel.swift in Sources */,
 				01E0CA5329B1C90E008BD09C /* FVLabel.swift in Sources */,
 				01E0CA5129B1C745008BD09C /* CustomCollectionViewCell.swift in Sources */,

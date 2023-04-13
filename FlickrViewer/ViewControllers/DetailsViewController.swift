@@ -14,10 +14,13 @@ class DetailsViewController: UIViewController {
     
     private var viewModel: DetailsViewModel?
     
-    public var imageView = UIImageView()
-    public var titleLabel = FVLabel(fontSize: .heading)
-    public var idLabel = FVLabel(fontSize: .subheading)
-    public var tagLabel = FVLabel(fontSize: .body)
+    var imageView = UIImageView()
+    var titleLabel = FVLabel(fontSize: .heading)
+    var idLabel = FVLabel(fontSize: .subheading)
+    var tagLabel = FVLabel(fontSize: .body)
+    var closeButton = FVCloseButton()
+    
+    private var widthMult = 0.8
     
     init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
@@ -34,24 +37,41 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        viewModel?.assignData(vc: self) // might want to move this to the init
+        viewModel?.assignData(vc: self)
+        
+        configureCloseButton()
         configureImageView()
         configureLabels()
         
     }
     
     // set some constants to improve readability ie width = 0.8 or defaultImg = UIImage(smth)
+    
+    
+    
+    private func configureCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            closeButton.heightAnchor.constraint(equalToConstant: 20),
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
+            
+        ])
+    }
+    
+    
     private func configureImageView(){
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-//        imageView.image = self.img ?? UIImage(systemName: "bolt.circle") // replace with img url
 
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
+            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult),
+            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
+            imageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 40)
         ])
     }
     
@@ -61,14 +81,14 @@ class DetailsViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
-            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult)
 
         ])
         view.addSubview(idLabel)
         NSLayoutConstraint.activate([
             idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            idLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            idLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult)
 
         ])
         
@@ -76,9 +96,15 @@ class DetailsViewController: UIViewController {
         NSLayoutConstraint.activate([
             tagLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tagLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 20),
-            tagLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            tagLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult)
         ])
         
+    }
+    
+
+    
+    @objc func closeButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
     
 }

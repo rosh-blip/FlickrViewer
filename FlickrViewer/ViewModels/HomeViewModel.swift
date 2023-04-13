@@ -20,20 +20,12 @@ final class HomeViewModel {
     
     weak var delegate: HomeViewModelDelegate?
     
-    private var locationService = LocationService()
-    private var networkService = NetworkService()
+    var locationService = LocationService()
+    var networkService = NetworkService()
     
-    public let num = 100
-    static var metaData: Flickr?
-    static var imageDict: [String: UIImage] = [:]
-    
-    public enum metaDataField {
-        case id
-        case title
-        case server
-        case secret
-        case tags
-    }
+    let num = 100
+    var metaData: Flickr?
+    var imageDict: [String: UIImage] = [:] // instead of creating a dictionary i could just add a new field to metaData
     
     
     public let defaultText: String = "Loading..."
@@ -53,10 +45,11 @@ final class HomeViewModel {
     private func requestMetaData(location: CLLocation) {
         let url = networkService.formatMetaDataRequest(location: location, num: num)
         
-        networkService.fetchMetaData(from: url) { success, data in
+        networkService.fetchMetaData(from: url) { [weak self] success, data in
+            guard let self = self else { return }
             if success {
                 guard let data = data else { return }
-                HomeViewModel.metaData = data
+                self.metaData = data
                 self.delegate?.didUpdateImgList()
             } else {
                 print("Metadata Network Request failed")
@@ -64,57 +57,37 @@ final class HomeViewModel {
         }
     }
     
-    public func requestImage(of id: String, from url: URL){
+    func requestImage(of id: String, from url: URL){
         networkService.fetchImage(of: id, from: url)
     }
     
-    
-    
-    public func getId(at position: Int) -> String {
-        return HomeViewModel.metaData?.photos.photo[position].id ?? defaultText
+    func getData(at position: Int) -> Photo? {
+        return metaData?.photos.photo[position]
     }
     
-    public func getServer(at position: Int) -> String {
-        return HomeViewModel.metaData?.photos.photo[position].server ?? defaultText
+     func getId(at position: Int) -> String {
+        return metaData?.photos.photo[position].id ?? defaultText
     }
     
-    public func getSecret(at position: Int) -> String {
-        return HomeViewModel.metaData?.photos.photo[position].secret ?? defaultText
+    func getServer(at position: Int) -> String {
+        return metaData?.photos.photo[position].server ?? defaultText
     }
     
-    public func getTitle(at position: Int) -> String {
-        return HomeViewModel.metaData?.photos.photo[position].title ?? defaultText
+    func getSecret(at position: Int) -> String {
+        return metaData?.photos.photo[position].secret ?? defaultText
     }
     
-    public func getTags(at position: Int) -> String {
-        return HomeViewModel.metaData?.photos.photo[position].tags ?? defaultText
+    func getTitle(at position: Int) -> String {
+        return metaData?.photos.photo[position].title ?? defaultText
     }
     
-    public func getURL(at position: Int) -> URL {
-        return HomeViewModel.metaData?.photos.photo[position].url ?? URL(string: defaultText)!
+    func getTags(at position: Int) -> String {
+        return metaData?.photos.photo[position].tags ?? defaultText
     }
     
-//    public func getMetaDataField(metaDataField: metaDataField, at position: Int){
-//        var field: String?
-//        switch metaDataField {
-//        case .id:
-//            field = "id"
-//        case .title:
-//            <#code#>
-//        case .server:
-//            <#code#>
-//        case .secret:
-//            <#code#>
-//        case .tags:
-//            <#code#>
-//        }
-//        return HomeViewModel.metaData?.photos.photo[position].field
-//    }
-    
-//    public func requestImg(server: String, id: String, secret: String) {
-//        let url = networkService.formatImgRequest(server: server, id: id, secret: secret)
-//        networkService.getImg(from: url, id: id)
-//    }
+    func getURL(at position: Int) -> URL {
+        return metaData?.photos.photo[position].url ?? URL(string: defaultText)!
+    }
 }
 
 
@@ -128,8 +101,7 @@ extension HomeViewModel: LocationServiceDelegate {
 
 extension HomeViewModel: NetworkServiceDelegate {
     func didGetImg(image: UIImage, id: String) {
-    
-        HomeViewModel.imageDict[id] = image
+        imageDict[id] = image
         self.delegate?.didUpdateImgs()
     }
 }
