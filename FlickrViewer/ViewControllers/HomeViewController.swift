@@ -71,10 +71,13 @@ extension HomeViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
-        
-        let id = viewModel.getId(at: indexPath.row)
+                let id = viewModel.getId(at: indexPath.row)
         let url = viewModel.getURL(at:indexPath.row)
         let cellImage = cell.imageView.image
+        cell.imageView.contentMode = UIView.ContentMode.scaleAspectFill
+        cell.imageView.layer.masksToBounds = true
+
+        
         
         if(cellImage == nil || cellImage == UIImage(systemName: "gear")){
             if(id != viewModel.defaultText) {
