@@ -10,6 +10,8 @@ import UIKit
 final class DetailsViewController: UIViewController {
     
     private var viewModel: DetailsViewModel?
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
     let imageView = UIImageView()
     let titleLabel = FVLabel(fontSize: .heading)
@@ -17,12 +19,9 @@ final class DetailsViewController: UIViewController {
     let tagLabel = FVLabel(fontSize: .body)
     let closeButton = FVCloseButton()
     
-    private var widthMult = 0.8
-    
-
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-
+    private let textWidth = 0.75
+    private let imageWidth = 0.9
+    private let spacing: CGFloat = 30
     
     init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
@@ -83,8 +82,8 @@ final class DetailsViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 30),
-            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9)
+            imageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: spacing),
+            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: imageWidth)
         ])
     }
     
@@ -92,22 +91,22 @@ final class DetailsViewController: UIViewController {
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4)
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: spacing),
+            titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: textWidth)
         ])
         
         contentView.addSubview(idLabel)
         NSLayoutConstraint.activate([
             idLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 200),
-            idLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
+            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: spacing),
+            idLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: textWidth),
         ])
         
         contentView.addSubview(tagLabel)
         NSLayoutConstraint.activate([
             tagLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            tagLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 200),
-            tagLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
+            tagLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: spacing),
+            tagLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: textWidth),
             tagLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
