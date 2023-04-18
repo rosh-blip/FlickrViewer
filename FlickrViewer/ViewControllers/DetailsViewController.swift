@@ -12,6 +12,7 @@ final class DetailsViewController: UIViewController {
     private var viewModel: DetailsViewModel?
     private let scrollView = UIScrollView()
     private let contentView = UIView()
+//    private let navBar = UINavigationBar() // plans to implement a standalone navigation bar
     
     let imageView = UIImageView()
     let titleLabel = FVLabel(fontSize: .heading)
@@ -43,6 +44,16 @@ final class DetailsViewController: UIViewController {
         configureImageView()
         configureLabels()
     }
+    
+    
+//    private func configureNavBar() {
+//
+//
+//        let navItems = UINavigationItem()
+//        navBar.popItem(animated: true) // probs use this in the did touch inside feature
+//        navItems.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
+//
+//    }
     
     private func configureScrollView(){
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +122,7 @@ final class DetailsViewController: UIViewController {
         ])
     }
     
-    @objc func closeButtonTapped() {
+    @objc private func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
     
