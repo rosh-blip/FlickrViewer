@@ -25,7 +25,7 @@ class FVLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(fontSize: textSize){ // make an enum for heading, subheading, body
+    init(fontSize: textSize){
         super.init(frame: .zero)
         switch fontSize{
         case .heading:
@@ -48,7 +48,7 @@ class FVLabel: UILabel {
         self.textColor = .label
         self.textAlignment = .center
         self.numberOfLines = 0
-        self.lineBreakMode = .byWordWrapping
+        self.sizeToFit()
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     

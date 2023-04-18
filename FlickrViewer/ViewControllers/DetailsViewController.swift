@@ -7,10 +7,7 @@
 
 import UIKit
 
-// use separate vm for the details vc 
-// use to assign the data from the prev vc
-
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
     
     private var viewModel: DetailsViewModel?
     
@@ -22,6 +19,10 @@ class DetailsViewController: UIViewController {
     
     private var widthMult = 0.8
     
+
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+
     
     init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
@@ -33,72 +34,82 @@ class DetailsViewController: UIViewController {
     }
     
     
-    // use a different ui lifecycle to improve performance
     override func loadView() {
         super.loadView()
         view.backgroundColor = .systemBackground
         viewModel?.assignData(vc: self)
         
+        configureScrollView()
         configureCloseButton()
         configureImageView()
         configureLabels()
-        
     }
     
-    // set some constants to improve readability ie width = 0.8 or defaultImg = UIImage(smth)
-    
+    private func configureScrollView(){
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        NSLayoutConstraint.activate([
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
+    }
     
     
     private func configureCloseButton() {
-        view.addSubview(closeButton)
+        contentView.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             closeButton.heightAnchor.constraint(equalToConstant: 20),
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
-            
+            closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20)
         ])
     }
     
-    
-    private func configureImageView(){
-        view.addSubview(imageView)
+    private func configureImageView() {
+        contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult),
-            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 40)
+            imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 30),
+            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9)
         ])
     }
     
-    
-    private func configureLabels(){
-        view.addSubview(titleLabel)
+    private func configureLabels() {
+        contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
-            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult)
-
-        ])
-        view.addSubview(idLabel)
-        NSLayoutConstraint.activate([
-            idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            idLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult)
-
+            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4)
         ])
         
-        view.addSubview(tagLabel)
+        contentView.addSubview(idLabel)
         NSLayoutConstraint.activate([
-            tagLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tagLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 20),
-            tagLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMult)
+            idLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 200),
+            idLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
         ])
         
+        contentView.addSubview(tagLabel)
+        NSLayoutConstraint.activate([
+            tagLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            tagLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 200),
+            tagLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
+            tagLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
     
     @objc func closeButtonTapped() {
