@@ -16,31 +16,50 @@ class HomeViewController: UIViewController {
     private var viewModel = HomeViewModel()
     override func loadView() {
         super.loadView()
-        
- 
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: (view.frame.size.width/3) - 4,
-                                 height: (view.frame.size.height/5) - 7)
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        guard let collectionView = collectionView else { return }
-        
-        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        view.addSubview(collectionView)
-        collectionView.frame = view.bounds
+        view.backgroundColor = .systemBackground
+        configureCollectionView()
     }
     
     override func viewDidLoad() {
         viewModel.initHomeViewModel(delegate: self)
         viewModel.requestLocation()
     }
+    
+    private func configureCollectionView() {
+        let layout = configureCollectionViewLayout()
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        guard let collectionView = collectionView else { return }
+        
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+       
+        configureCollectionViewBounds(collectionView: collectionView)
+    }
+    
+    private func configureCollectionViewLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 6
+        layout.minimumInteritemSpacing = 1
+        layout.itemSize = CGSize (width: (view.frame.size.width/3) - 4,
+                                  height: (view.frame.size.height/5) - 7)
+        return layout
+        
+    }
+    
+    private func configureCollectionViewBounds(collectionView: UICollectionView){
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
 }
 
  
