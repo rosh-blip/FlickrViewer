@@ -21,6 +21,7 @@
 		01E0CA5529B1D291008BD09C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0CA5429B1D291008BD09C /* DetailsViewController.swift */; };
 		C4BE182329DBF66E0077319E /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE182229DBF66E0077319E /* DetailsViewModel.swift */; };
 		C4BE182729E7CA840077319E /* FVCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE182629E7CA840077319E /* FVCloseButton.swift */; };
+		C4BE182929EE58100077319E /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE182829EE58100077319E /* SpinnerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		01E0CA5429B1D291008BD09C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		C4BE182229DBF66E0077319E /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		C4BE182629E7CA840077319E /* FVCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FVCloseButton.swift; path = FlickrViewer/Utilities/FVCloseButton.swift; sourceTree = SOURCE_ROOT; };
+		C4BE182829EE58100077319E /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,6 @@
 		011CF58729BB018D00C8AAC7 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */,
 				011CF58429BAF3CB00C8AAC7 /* HomeViewModel.swift */,
 				C4BE182229DBF66E0077319E /* DetailsViewModel.swift */,
 			);
@@ -76,6 +77,8 @@
 			children = (
 				018A99CF29ADA28F006330D8 /* HomeViewController.swift */,
 				01E0CA5429B1D291008BD09C /* DetailsViewController.swift */,
+				01E0CA5029B1C745008BD09C /* CustomCollectionViewCell.swift */,
+				C4BE182829EE58100077319E /* SpinnerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				016E087029D11B3E0010F16D /* NetworkService.swift in Sources */,
 				018A99BC29ADA197006330D8 /* AppDelegate.swift in Sources */,
 				018A99BE29ADA197006330D8 /* SceneDelegate.swift in Sources */,
+				C4BE182929EE58100077319E /* SpinnerViewController.swift in Sources */,
 				011CF57D29B84B3700C8AAC7 /* FlickrDataModel.swift in Sources */,
 				C4BE182729E7CA840077319E /* FVCloseButton.swift in Sources */,
 				011CF58529BAF3CB00C8AAC7 /* HomeViewModel.swift in Sources */,

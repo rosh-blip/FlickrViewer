@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
         guard let collectionView = collectionView else { return }
         
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
+        collectionView.register(SpinnerCell.self, forCellWithReuseIdentifier: SpinnerCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
        
@@ -66,23 +67,28 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.num
+        if let imageList = viewModel.metaData?.photos.photo {
+            return (imageList.count > 0) ? (imageList.count) : 0
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
-                let id = viewModel.getId(at: indexPath.row)
+        let spinnerCell = collectionView.dequeueReusableCell(withReuseIdentifier: SpinnerCell.identifier, for: indexPath) as! SpinnerCell
+        
+        let id = viewModel.getId(at: indexPath.row)
         let url = viewModel.getURL(at:indexPath.row)
         let cellImage = cell.imageView.image
+        
         cell.imageView.contentMode = UIView.ContentMode.scaleAspectFill
         cell.imageView.layer.masksToBounds = true
-
         
-        
-        if(cellImage == nil || cellImage == UIImage(systemName: "gear")){
+        if(cellImage == nil) {
             if(id != viewModel.defaultText) {
                 if(viewModel.imageDict[id] == nil){
                     viewModel.requestImage(of: id, from: url)
+                    return spinnerCell
                 }
             }
                 // have a placeholder intially instead of
