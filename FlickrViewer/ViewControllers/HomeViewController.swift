@@ -79,24 +79,16 @@ extension HomeViewController: UICollectionViewDataSource{
         
         let id = viewModel.getId(at: indexPath.row)
         let url = viewModel.getURL(at:indexPath.row)
-        let cellImage = cell.imageView.image
         
         cell.imageView.contentMode = UIView.ContentMode.scaleAspectFill
         cell.imageView.layer.masksToBounds = true
         
-        if(cellImage == nil) {
-            if(id != viewModel.defaultText) {
-                if(viewModel.imageDict[id] == nil){
-                    viewModel.requestImage(of: id, from: url)
-                    return spinnerCell
-                }
-            }
-                // have a placeholder intially instead of
-                // UIActivityIndicatorView loading spinner (sort of) can use for a splash screen
-            cell.updateImage(img: viewModel.imageDict[id] ?? UIImage(systemName: "gear")!)
-//            }
+        if(viewModel.imageDict[id] == nil){
+            viewModel.requestImage(of: id, from: url)
+            return spinnerCell
         }
         
+        cell.updateImage(img: viewModel.imageDict[id])
         return cell
     }
 }

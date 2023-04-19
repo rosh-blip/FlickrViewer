@@ -29,11 +29,17 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
+        imageView.frame =
+        CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
     }
     
-    public func updateImage(img: UIImage){
+    public func updateImage(img: UIImage?){
+        // need a good default image in the case that there is a bad url
+        if let img = img {
             self.imageView.image = img
+        } else {
+            self.imageView.image = UIImage(systemName: "globe")
+        }
     }
 
     override func prepareForReuse() {

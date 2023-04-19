@@ -58,7 +58,9 @@ final class HomeViewModel {
     }
     
     func requestImage(of id: String, from url: URL){
-        networkService.fetchImage(of: id, from: url)
+        if(imageDict[id] == nil) && (url.absoluteString != defaultText) {
+            networkService.fetchImage(of: id, from: url)
+        }
     }
     
     func getData(at position: Int) -> Photo? {
