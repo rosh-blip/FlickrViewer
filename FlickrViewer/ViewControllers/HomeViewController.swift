@@ -83,13 +83,14 @@ extension HomeViewController: UICollectionViewDataSource{
         cell.imageView.contentMode = UIView.ContentMode.scaleAspectFill
         cell.imageView.layer.masksToBounds = true
         
-        if(viewModel.imageDict[id] == nil){
-            viewModel.requestImage(of: id, from: url)
-            return spinnerCell
+        if(viewModel.isImageCached(of: id)){
+            cell.updateImage(img: viewModel.getImage(of: id))
+            return cell
         }
         
-        cell.updateImage(img: viewModel.imageDict[id])
-        return cell
+        viewModel.requestImage(of: id, from: url)
+        return spinnerCell
+        
     }
 }
 

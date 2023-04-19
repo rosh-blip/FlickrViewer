@@ -90,6 +90,18 @@ final class HomeViewModel {
     func getURL(at position: Int) -> URL {
         return metaData?.photos.photo[position].url ?? URL(string: defaultText)!
     }
+    
+    
+    func getImage(of id: String) -> UIImage {
+        return imageDict[id]!
+    }
+    
+    func isImageCached(of id: String) -> Bool {
+        if imageDict[id] != nil {
+            return true
+        }
+        return false
+    }
 }
 
 
